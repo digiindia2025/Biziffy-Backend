@@ -1,41 +1,33 @@
 import { Request, Response } from "express";
+import Category from "../../models/Category";
 
-// In-memory category storage (can be replaced with DB later)
-let categories: any[] = [];
-
-export const createCategory = (req: Request, res: Response) => {
+// ✅ CREATE CATEGORY
+export const createCategory = async (req: Request, res: Response) => {
   try {
     const { name, status } = req.body;
-    const icon = req.file ? req.file.filename : null;
+    const icon = req.file ? `/uploads/${req.file.filename}` : "";
 
-    if (!name || !status || !icon) {
-      return res.status(400).json({ message: "Missing required fields" });
-    }
-
-    const newCategory = {
-      id: Date.now(),
+    const newCategory = new Category({
       name,
-      iconUrl: `http://localhost:5000/uploads/${icon}`,
+      icon,
       status,
-    };
-
-    categories.push(newCategory);
-
-    res.status(201).json({
-      message: "Category created successfully",
-      category: newCategory,
     });
+
+    await newCategory.save();
+    res.status(201).json({ message: "Category created successfully", category: newCategory });
   } catch (error) {
-    console.error("Create category error:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Create Category Error:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-export const getAllCategories = (req: Request, res: Response) => {
+// ✅ GET ALL CATEGORIES
+export const getAllCategories = async (req: Request, res: Response) => {
   try {
+    const categories = await Category.find().sort({ createDate: -1 });
     res.status(200).json(categories);
   } catch (error) {
-    console.error("Get categories error:", error);
-    res.status(500).json({ message: "Failed to fetch categories" });
+    console.error("Fetch Categories Error:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };

@@ -1,29 +1,21 @@
 import express from "express";
 import multer from "multer";
-import path from "path";
-import {
-  createCategory,
-  getAllCategories,
-} from "../../controllers/admin/categoryController";
+import { createCategory, getAllCategories } from "../../controllers/admin/categoryController";
 
 const router = express.Router();
 
-// File upload config
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: function (req, file, cb) {
     cb(null, "uploads/");
   },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  }
 });
 
 const upload = multer({ storage });
 
-// POST /api/categories
-router.post("/", upload.single("icon"), createCategory);
-
-// GET /api/categories
-router.get("/", getAllCategories);
+router.post("/categories", upload.single("icon"), createCategory);
+router.get("/categories", getAllCategories); // 👈 Add this
 
 export default router;

@@ -32,7 +32,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 // Routes
 app.use("/api/advertisements", advertisementRoutes);
 app.use("/api/admin/child-categories", childCategoryRoutes);
-app.use("/api/admin/categories", categoryRoutes);
+app.use("/api", categoryRoutes);
 app.use("/api/admin/subcategories", subcategoryRoutes);
 app.use('/api/admin/listings', listingRoutes);
 app.use("/api/admin", userRoutes);
