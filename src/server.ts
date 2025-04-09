@@ -14,6 +14,7 @@ import subcategoryRoutes from "./routes/admin/subcategoryRoutes";
 import listingRoutes from './routes/admin/listingRoutes';
 import userRoutes from "./routes/admin/userRoutes";
 import deactivateUserRoutes from "./routes/admin/deactivateUserRoute";
+import contactRoutes from "./routes/admin/contactRoutes";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -37,6 +38,7 @@ app.use("/api/admin/subcategories", subcategoryRoutes);
 app.use('/api/admin/listings', listingRoutes);
 app.use("/api/admin", userRoutes);
 app.use("/api/admin", deactivateUserRoutes);
+app.use("/api/admin/contacts", contactRoutes);
 
 
 // Start server

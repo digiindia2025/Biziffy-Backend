@@ -1,16 +1,23 @@
-// backend/src/models/Advertisement.ts
+// models/Advertisement.ts
+
 import mongoose from "mongoose";
 
-const advertisementSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  image: String,
-  status: {
+const AdvertisementSchema = new mongoose.Schema(
+  {
+    title: String,
     type: String,
-    enum: ["active", "inactive"],
-    default: "active"
+    businessCategory: String,
+    subCategory: String,
+    childCategory: String,
+    redirectUrl: String,
+    image: String,
+    status: {
+      type: String,
+      enum: ["Active", "Inactive"], // <-- allow capitalized values
+      required: true,
+    },
   },
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-const Advertisement = mongoose.model("Advertisement", advertisementSchema);
-export default Advertisement;
+export default mongoose.model("Advertisement", AdvertisementSchema);
