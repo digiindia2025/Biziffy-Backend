@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { createSubcategory } from "../../controllers/admin/subcategoryController";
+import { createSubcategory , getAllSubcategories } from "../../controllers/admin/subcategoryController";
 
 const router = express.Router();
 
@@ -10,5 +10,6 @@ const upload = multer({ storage });
 
 // POST /api/admin/subcategories/create
 router.post("/create", upload.single("image"), createSubcategory);
+router.get("/", getAllSubcategories);
 
 export default router;
