@@ -1,0 +1,38 @@
+// server.ts
+import dotenv from "dotenv";
+dotenv.config(); // ✅ Load env variables first
+
+import express from "express";
+import cors from "cors";
+import path from "path";
+import { connectDB } from "../config/db";
+
+import advertisementRoutes from "./routes/admin/advertisementRoutes";
+import childCategoryRoutes from "./routes/admin/childCategoryRoutes"
+import categoryRoutes from "./routes/admin/categoryRoutes";
+import subcategoryRoutes from "./routes/admin/subcategoryRoutes";
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Connect MongoDB
+connectDB();
+
+// Middleware
+app.use(cors({ origin: "http://localhost:8080", credentials: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static image files
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+
+// Routes
+app.use("/api/advertisements", advertisementRoutes);
+app.use("/api/admin/child-categories", childCategoryRoutes);
+app.use("/api/admin/categories", categoryRoutes);
+app.use("/api/admin/subcategories", subcategoryRoutes);
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
