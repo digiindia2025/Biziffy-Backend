@@ -18,6 +18,8 @@ import contactRoutes from "./routes/admin/contactRoutes";
 import departmentRoutes from "./routes/admin/departmentRoutes";
 import supportTicketRoutes from "./routes/admin/supportTicketRoutes";
 import dashboardRoutes from "./routes/admin/dashboardRoutes";
+import enquiryRoutes from "./routes/admin/enquiryRoutes";
+import linkRoutes from "./routes/admin/linkRoutes";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -45,6 +47,9 @@ app.use("/api/admin/contacts", contactRoutes);
 app.use("/api/departments", departmentRoutes);
 app.use("/api/admin", supportTicketRoutes);
 app.use("/api/admin/dashboard", dashboardRoutes);
+app.use("/api/enquiries", enquiryRoutes);
+app.use("/api/links", linkRoutes);
+
 
 // Start server
 app.listen(PORT, () => {
