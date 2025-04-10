@@ -15,6 +15,9 @@ import listingRoutes from './routes/admin/listingRoutes';
 import userRoutes from "./routes/admin/userRoutes";
 import deactivateUserRoutes from "./routes/admin/deactivateUserRoute";
 import contactRoutes from "./routes/admin/contactRoutes";
+import departmentRoutes from "./routes/admin/departmentRoutes";
+import supportTicketRoutes from "./routes/admin/supportTicketRoutes";
+import dashboardRoutes from "./routes/admin/dashboardRoutes";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -39,6 +42,9 @@ app.use('/api/admin/listings', listingRoutes);
 app.use("/api/admin", userRoutes);
 app.use("/api/admin", deactivateUserRoutes);
 app.use("/api/admin/contacts", contactRoutes);
+app.use("/api/admin/departments", departmentRoutes);
+app.use("/api/admin", supportTicketRoutes);
+app.use("/api/admin/dashboard", dashboardRoutes);
 
 
 // Start server
