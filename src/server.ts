@@ -46,7 +46,6 @@ app.use("/api/departments", departmentRoutes);
 app.use("/api/admin", supportTicketRoutes);
 app.use("/api/admin/dashboard", dashboardRoutes);
 
-
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
