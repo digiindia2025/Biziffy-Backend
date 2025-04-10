@@ -11,7 +11,7 @@ import advertisementRoutes from "./routes/admin/advertisementRoutes";
 import childCategoryRoutes from "./routes/admin/childCategoryRoutes"
 import categoryRoutes from "./routes/admin/categoryRoutes";
 import subcategoryRoutes from "./routes/admin/subcategoryRoutes";
-import listingRoutes from './routes/admin/listingRoutes';
+import listingRoutes from "./routes/admin/listingRoutes";
 import userRoutes from "./routes/admin/userRoutes";
 import deactivateUserRoutes from "./routes/admin/deactivateUserRoute";
 import contactRoutes from "./routes/admin/contactRoutes";
@@ -41,7 +41,7 @@ app.use("/api/advertisements", advertisementRoutes);
 app.use("/api/admin/child-categories", childCategoryRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api/admin/subcategories", subcategoryRoutes);
-app.use('/api/admin/listings', listingRoutes);
+app.use("/api/admin", listingRoutes); // 👈 important!
 app.use("/api/admin", userRoutes);
 app.use("/api/admin", deactivateUserRoutes);
 app.use("/api/admin/contacts", contactRoutes);
