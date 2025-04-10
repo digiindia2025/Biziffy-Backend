@@ -42,7 +42,7 @@ app.use('/api/admin/listings', listingRoutes);
 app.use("/api/admin", userRoutes);
 app.use("/api/admin", deactivateUserRoutes);
 app.use("/api/admin/contacts", contactRoutes);
-app.use("/api/admin/departments", departmentRoutes);
+app.use("/api/departments", departmentRoutes);
 app.use("/api/admin", supportTicketRoutes);
 app.use("/api/admin/dashboard", dashboardRoutes);
 
