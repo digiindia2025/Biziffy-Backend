@@ -1,20 +1,46 @@
-// models/Advertisement.ts
-
 import mongoose from "mongoose";
 
 const AdvertisementSchema = new mongoose.Schema(
   {
-    title: String,
-    type: String,
-    businessCategory: String,
-    subCategory: String,
-    childCategory: String,
-    redirectUrl: String,
-    image: String,
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    businessCategory: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    subCategory: {
+      type: String,
+      default: null,
+      trim: true,
+    },
+    childCategory: {
+      type: String,
+      default: null,
+      trim: true,
+    },
+    redirectUrl: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    image: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
-      enum: ["Active", "Inactive"], // <-- allow capitalized values
+      enum: ["Active", "Inactive"],
       required: true,
+      default: "Active",
     },
   },
   { timestamps: true }
