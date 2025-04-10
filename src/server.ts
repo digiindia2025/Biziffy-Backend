@@ -21,7 +21,7 @@ import dashboardRoutes from "./routes/admin/dashboardRoutes";
 import enquiryRoutes from "./routes/admin/enquiryRoutes";
 import linkRoutes from "./routes/admin/linkRoutes";
 import reviewRoutes from "./routes/admin/reviewRoutes";
-
+import membershipRoutes from "./routes/admin/membershipRoutes";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -51,7 +51,7 @@ app.use("/api/admin/dashboard", dashboardRoutes);
 app.use("/api/enquiries", enquiryRoutes);
 app.use("/api/links", linkRoutes);
 app.use("/api/reviews", reviewRoutes);
-
+app.use("/api/memberships", membershipRoutes);
 
 // Start server
 app.listen(PORT, () => {
