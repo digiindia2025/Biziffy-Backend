@@ -1,24 +1,24 @@
 import { Request, Response } from "express";
 import User from "../../models/userModel";
 
-// GET all users
 export const getAllUsers = async (req: Request, res: Response) => {
-  try {
-    const users = await User.find().sort({ createdAt: -1 });
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json({ message: "Error fetching users", error: err });
-  }
+  const users = await User.find();
+  res.json(users);
 };
 
-// POST add user
-export const addUser = async (req: Request, res: Response) => {
-  try {
-    const { name, email, phone, status } = req.body;
-    const newUser = new User({ name, email, phone, status });
-    await newUser.save();
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(500).json({ message: "Error creating user", error: err });
-  }
+export const getUserById = async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.id);
+  if (!user) return res.status(404).json({ message: "User not found" });
+  res.json(user);
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  await User.findByIdAndDelete(req.params.id);
+  res.json({ message: "User deleted successfully" });
+};
+
+export const updateUserStatus = async (req: Request, res: Response) => {
+  const { status } = req.body;
+  const user = await User.findByIdAndUpdate(req.params.id, { status }, { new: true });
+  res.json(user);
 };
