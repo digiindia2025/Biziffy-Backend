@@ -1,15 +1,18 @@
 import express from "express";
 import multer from "multer";
-import { createSubcategory , getAllSubcategories } from "../../controllers/admin/subcategoryController";
+import {
+  createSubcategory,
+  getAllSubcategories,
+  updateSubcategoryById,
+  deleteSubcategoryById,
+} from "../../controllers/admin/subcategoryController";
 
 const router = express.Router();
+const upload = multer({ dest: "uploads/" });
 
-// Configure multer for image uploads
-const storage = multer.memoryStorage(); // or use diskStorage if saving locally
-const upload = multer({ storage });
-
-// POST /api/admin/subcategories/create
-router.post("/create", upload.single("image"), createSubcategory);
+router.post("/", upload.single("image"), createSubcategory);
 router.get("/", getAllSubcategories);
+router.put("/:id", upload.single("image"), updateSubcategoryById);
+router.delete("/:id", deleteSubcategoryById);
 
 export default router;
