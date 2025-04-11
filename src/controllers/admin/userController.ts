@@ -77,3 +77,19 @@ export const createUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+// PATCH toggle user status
+export const toggleUserStatus = async (req: Request, res: Response) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.status = user.status === "Active" ? "Deactivated" : "Active";
+    await user.save();
+
+    res.json(user);
+  } catch (error) {
+    console.error("Error toggling user status:", error);
+    res.status(500).json({ message: "Failed to toggle user status" });
+  }
+};
